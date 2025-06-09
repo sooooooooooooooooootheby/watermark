@@ -1,0 +1,34 @@
+@font-face {
+	font-family: CrimsonText;
+    src: url("./typeface/CrimsonText-Regular.ttf");
+}
+
+@font-face {
+	font-family: BrockScript;
+	src: url("./typeface/BrockScript.ttf");
+}
+
+@font-face {
+	font-family: Shintyan;
+	src: url("./typeface/Shintyan.ttf");
+}
+
+@font-face {
+	font-family: PingFang;
+	src: url("./typeface/PingFang.otf");
+}
+
+@font-face {
+	font-family: YouraScript;
+	src: url("./typeface/YouraScript.ttf");
+}
+
+@font-face {
+	font-family: StillNight;
+	src: url("./typeface/Still Night.ttf");
+}
+
+@font-face {
+	font-family: SignaritaZhaiRhianne;
+	src: url("./typeface/Signarita Zhai Rhianne.ttf");
+}

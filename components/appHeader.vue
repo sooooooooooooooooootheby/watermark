@@ -1,6 +1,6 @@
 <template>
 	<div class="w-vw h-16 px-12 bg-white border-b border-gray-200">
-		<div class="w-7xl h-full mx-auto flex items-center justify-between">
+		<div class="max-w-7xl h-full mx-auto flex items-center justify-between">
 			<div>
 				<p class="font-[StillNight] text-2xl">
 					<NuxtLink to="/">Watermark</NuxtLink>

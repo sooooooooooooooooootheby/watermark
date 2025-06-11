@@ -1,5 +1,5 @@
 <template>
-	<div class="flex justify-between">
+	<div class="flex justify-between" v-if="imgObj">
 		<div class="w-1/2 pr-4 flex flex-col justify-between">
 			<div class="[&>*]:mt-4">
 				<label for="file" class="cursor-pointer relative">
@@ -56,6 +56,15 @@
 		<div class="w-1/2 canvas-container">
 			<canvas ref="canvasRef" width="0" height="0" class="border-1 border-gray-400"></canvas>
 		</div>
+	</div>
+	<div v-else>
+		<label for="file" class="cursor-pointer relative">
+			<div class="w-full h-screen border-2 border-dashed border-gray-400 rounded-lg flex items-center justify-center">
+				<Icon class="text-4xl text-gray-500" name="mynaui:file" />
+			</div>
+			<input type="file" accept="image/*" id="file" @change="onFileChange" class="hidden" />
+			<div class="w-full h-full absolute top-0 left-0" style="z-index: 1" @drop.prevent="onDrop" @dragover.prevent="dragOverHandler"></div>
+		</label>
 	</div>
 </template>
 
@@ -224,7 +233,9 @@ const onFileChange = async (event: Event) => {
 		const img = new Image();
 		img.onload = () => {
 			imgObj.value = img;
-			drawCanvas();
+			nextTick(() => {
+				drawCanvas();
+			});
 		};
 		img.onerror = () => {
 			console.error("图片加载失败");
@@ -240,7 +251,9 @@ const onDrop = (event: DragEvent) => {
 		const img = new Image();
 		img.onload = () => {
 			imgObj.value = img;
-			drawCanvas();
+			nextTick(() => {
+				drawCanvas();
+			});
 		};
 		img.onerror = () => {
 			console.error("图片加载失败");

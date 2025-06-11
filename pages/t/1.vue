@@ -72,7 +72,7 @@ let canvasWidth: number = 0;
 let canvasHeight: number = 0;
 
 const row2 = ref<string>("Alice Clodia");
-const row2Typeface = ref<string>("Shintyan");
+const row2Typeface = ref<string>("StillNight");
 const row2Color = ref<string>("rgba(246,194,192, 1)");
 const row2Size = ref<number>(4);
 const row4 = ref<string>("LUMIX G85");
@@ -100,11 +100,11 @@ const drawCanvas = () => {
 
 	// 设置基准比例
 	const baseSize: number = Math.sqrt(imgWidth ** 2 + imgHeight ** 2);
-	const fontSize: number = baseSize * 0.02;
+	const fontSize: number = baseSize * 0.01;
 
 	// 设置边距
-	paddingLeft.value = baseSize * 0.03;
-	paddingRight.value = baseSize * 0.03;
+	paddingLeft.value = baseSize * 0.01;
+	paddingRight.value = baseSize * 0.01;
 	paddingTop.value = baseSize * 0.16;
 	paddingBottom.value = baseSize * 0.16;
 
@@ -133,7 +133,7 @@ const drawCanvas = () => {
 
 	// 头部底部文字位置
 	const textX1: number = canvasWidth / 2;
-	const textY1: number = paddingTop.value / 2 - (fontSize * 3 + fontSize + fontSize) / 2;
+	const textY1: number = paddingTop.value / 2;
 	const textY2: number = canvasHeight - paddingBottom.value / 2 - (fontSize * 2) / 2;
 
 	interface configType {
@@ -206,9 +206,9 @@ const drawCanvas = () => {
 	}
 
 	// 执行绘制
-	drawWatermarkLine(WATERMARK_CONFIG.line1, textX1, textY1);
-	drawWatermarkLine(WATERMARK_CONFIG.line2, textX1, textY1 + fontSize * 3);
-	drawWatermarkLine(WATERMARK_CONFIG.line3, textX1, textY1 + fontSize * 5);
+	drawWatermarkLine(WATERMARK_CONFIG.line1, textX1, textY1 - (fontSize * (row2Size.value / 1.4)));
+	drawWatermarkLine(WATERMARK_CONFIG.line2, textX1, textY1);
+	drawWatermarkLine(WATERMARK_CONFIG.line3, textX1, textY1 + (fontSize * (row2Size.value / 2)));
 	drawWatermarkLine(WATERMARK_CONFIG.line4, textX1, textY2);
 	drawWatermarkLine(WATERMARK_CONFIG.line5, textX1, textY2 + fontSize * 2);
 };

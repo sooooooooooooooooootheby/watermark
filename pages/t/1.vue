@@ -1,53 +1,57 @@
 <template>
-	<div class="min-h-screen flex justify-between p-4 border-l border-r border-gray-200">
-		<div class="w-1/2 h-24 px-4 [&>*]:mt-4">
-			<label for="file" class="cursor-pointer relative">
-				<div class="w-full h-24 border-2 border-dashed border-gray-400 rounded-lg flex items-center justify-center">
-					<Icon class="text-4xl text-gray-500" name="mynaui:file" />
+	<div class="flex justify-between">
+		<div class="w-1/2 pr-4 flex flex-col justify-between">
+			<div class="[&>*]:mt-4">
+				<label for="file" class="cursor-pointer relative">
+					<div class="w-full h-24 border-2 border-dashed border-gray-400 rounded-lg flex items-center justify-center">
+						<Icon class="text-4xl text-gray-500" name="mynaui:file" />
+					</div>
+					<input type="file" accept="image/*" id="file" @change="onFileChange" class="hidden" />
+					<div class="w-full h-full absolute top-0 left-0" style="z-index: 1" @drop.prevent="onDrop" @dragover.prevent="dragOverHandler"></div>
+				</label>
+				<div class="grid w-full items-center gap-1.5">
+					<Label for="row2" class="font-semibold">Row2</Label>
+					<Input type="text" v-model="row2" id="row2" />
+					<div class="flex [&>*]:mr-1">
+						<color v-model="row2Color" />
+						<Select v-model="row2Typeface">
+							<SelectTrigger>
+								<SelectValue placeholder="Select typeface" />
+							</SelectTrigger>
+							<SelectContent>
+								<SelectGroup>
+									<SelectItem value="BrockScript" class="font-[BrockScript]"> BrockScript </SelectItem>
+									<SelectItem value="Shintyan" class="font-[Shintyan]"> Shintyan </SelectItem>
+									<SelectItem value="YouraScript" class="font-[YouraScript]"> YouraScript </SelectItem>
+									<SelectItem value="StillNight" class="font-[StillNight]"> StillNight </SelectItem>
+									<SelectItem value="SignaritaZhaiRhianne" class="font-[SignaritaZhaiRhianne]"> SignaritaZhaiRhianne </SelectItem>
+								</SelectGroup>
+							</SelectContent>
+						</Select>
+						<NumberField v-model="row2Size">
+							<NumberFieldContent>
+								<NumberFieldDecrement />
+								<NumberFieldInput />
+								<NumberFieldIncrement />
+							</NumberFieldContent>
+						</NumberField>
+					</div>
 				</div>
-				<input type="file" accept="image/*" id="file" @change="onFileChange" class="hidden" />
-				<div class="w-full h-full absolute top-0 left-0" style="z-index: 1" @drop.prevent="onDrop" @dragover.prevent="dragOverHandler"></div>
-			</label>
-			<div class="grid w-full items-center gap-1.5">
-				<Label for="row2" class="font-semibold">Row2</Label>
-				<Input type="text" v-model="row2" id="row2" />
-				<div class="flex [&>*]:mr-1">
-					<color v-model="row2Color" />
-					<Select v-model="row2Typeface">
-						<SelectTrigger>
-							<SelectValue placeholder="Select typeface" />
-						</SelectTrigger>
-						<SelectContent>
-							<SelectGroup>
-								<SelectItem value="BrockScript" class="font-[BrockScript]"> BrockScript </SelectItem>
-								<SelectItem value="Shintyan" class="font-[Shintyan]"> Shintyan </SelectItem>
-								<SelectItem value="YouraScript" class="font-[YouraScript]"> YouraScript </SelectItem>
-								<SelectItem value="StillNight" class="font-[StillNight]"> StillNight </SelectItem>
-								<SelectItem value="SignaritaZhaiRhianne" class="font-[SignaritaZhaiRhianne]"> SignaritaZhaiRhianne </SelectItem>
-							</SelectGroup>
-						</SelectContent>
-					</Select>
-					<NumberField v-model="row2Size">
-						<NumberFieldContent>
-							<NumberFieldDecrement />
-							<NumberFieldInput />
-							<NumberFieldIncrement />
-						</NumberFieldContent>
-					</NumberField>
+			</div>
+			<div class="[&>*]:mt-4">
+				<div class="grid w-full items-center gap-1.5">
+					<Label for="row4" class="font-semibold">Row4</Label>
+					<Input type="text" v-model="row4" id="row4" />
 				</div>
+				<div class="grid w-full items-center gap-1.5">
+					<Label for="row5" class="font-semibold">Row5</Label>
+					<Input type="text" v-model="row5" id="row5" />
+				</div>
+				<Button @click="downloadCanvas" class="cursor-pointer">
+					<Icon name="line-md:cloud-alt-download" />
+					Download
+				</Button>
 			</div>
-			<div class="grid w-full items-center gap-1.5">
-				<Label for="row4" class="font-semibold">Row4</Label>
-				<Input type="text" v-model="row4" id="row4" />
-			</div>
-			<div class="grid w-full items-center gap-1.5">
-				<Label for="row5" class="font-semibold">Row5</Label>
-				<Input type="text" v-model="row5" id="row5" />
-			</div>
-			<Button @click="downloadCanvas" class="cursor-pointer">
-				<Icon name="line-md:cloud-alt-download" />
-				Download
-			</Button>
 		</div>
 		<div class="w-1/2 canvas-container">
 			<canvas ref="canvasRef" width="0" height="0" class="border-1 border-gray-400"></canvas>
@@ -206,9 +210,9 @@ const drawCanvas = () => {
 	}
 
 	// 执行绘制
-	drawWatermarkLine(WATERMARK_CONFIG.line1, textX1, textY1 - (fontSize * (row2Size.value / 1.4)));
+	drawWatermarkLine(WATERMARK_CONFIG.line1, textX1, textY1 - fontSize * (row2Size.value / 1.4));
 	drawWatermarkLine(WATERMARK_CONFIG.line2, textX1, textY1);
-	drawWatermarkLine(WATERMARK_CONFIG.line3, textX1, textY1 + (fontSize * (row2Size.value / 2)));
+	drawWatermarkLine(WATERMARK_CONFIG.line3, textX1, textY1 + fontSize * (row2Size.value / 2));
 	drawWatermarkLine(WATERMARK_CONFIG.line4, textX1, textY2);
 	drawWatermarkLine(WATERMARK_CONFIG.line5, textX1, textY2 + fontSize * 2);
 };

@@ -1,6 +1,6 @@
 <template>
-	<div class="flex justify-between" v-if="imgObj">
-		<div class="w-1/2 pr-4 flex flex-col justify-between">
+	<div class="flex justify-between max-md:flex-col" v-if="imgObj">
+		<div class="w-1/2 pr-4 flex flex-col justify-between max-md:w-full max-md:p-0 max-md:mb-4">
 			<div class="[&>*]:mt-4">
 				<label for="file" class="cursor-pointer relative">
 					<div class="w-full h-24 border-2 border-dashed border-gray-400 rounded-lg flex items-center justify-center">
